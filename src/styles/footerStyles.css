@@ -1,0 +1,24 @@
+.footer-container{
+    /* border: solid 1px red; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    gap:25px;
+    align-items: center;
+    color: grey;
+}
+
+.footer-links{
+    display: flex;
+    gap:100px;
+}
+
+.footer-media{
+    display: flex;
+    gap: 25px;
+}
+
+.footer-links span, .footer-media span{
+    cursor: pointer;
+}

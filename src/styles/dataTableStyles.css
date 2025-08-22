@@ -1,0 +1,36 @@
+.table-container{
+    border: solid 1px rgb(0,0,0,0.2);
+    width: fit-content;    
+    overflow: hidden;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.table{
+    /* border: solid 1px rgb(0,0,0,0.2); */
+    /* border: solid 1px rgb(0,0,0,0.3); */
+    background-color: white;
+    border-collapse: collapse;
+    /* padding: 10; */
+}
+
+
+tr {
+    padding: 100px;
+    border-bottom: solid 1px rgb(0,0,0,0.5);
+
+}
+td{
+    min-width: 100px;
+    padding: 10px;
+    /* border: solid 1px red; */
+
+}
+
+.table-head{
+    min-width: 100px;
+    text-align: left;
+    text-transform: capitalize;
+    /* border: solid 1px red; */
+    padding: 10px;
+}

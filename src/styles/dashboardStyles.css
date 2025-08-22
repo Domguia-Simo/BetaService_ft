@@ -1,0 +1,56 @@
+.dashboard-container{
+    display: flex;
+    gap:1px;
+    background-color: whitesmoke;
+    background-image: url('../assets/dashboardBg.png');
+    /* border:solid 1px red */
+}
+
+.dashboard-blocks{
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+}
+
+.dashboard-block{
+    background-color: white;
+    padding:20px 20px;
+    border-radius: 10px;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    width:200px ;
+    box-shadow: 1px 1px 2px rgb(200,200,200);
+}
+
+
+.dashboard-headLink{
+    /* border:solid 1px red; */
+    width:100% ;
+    display:flex ;
+    justify-content:space-between ;
+    align-items:center;
+    gap: 300px;
+}
+
+.dashboard-btn{
+    border:solid 1px purple;
+    color:purple
+}
+.dashboard-btn2{
+    border:solid 1px purple;
+    color:white;
+    background-color: rgba(128,0,128,0.7);
+}
+.dashboard-page{
+    display:flex;
+    flex-direction:column ;
+    gap:20 ;
+    border: solid 0px green;
+}
+
+.dashboard-form{
+    border: solid 0px red;
+    width: fit-content;
+    margin:-10px auto;
+}
