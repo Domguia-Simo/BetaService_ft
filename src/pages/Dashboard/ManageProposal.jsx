@@ -1,35 +1,50 @@
-import React ,{useState ,useEffect} from "react";
+import React ,{useState ,useEffect ,useContext} from "react";
 import { HOST_NAME } from "../../config";
 import DataTable from "../../components/Dashboard/DataTable";
 import Select from "../../components/Select";
+import UserContext from "../../providers/userProvider";
 
 const ManageProposal = () => {
+    const {user ,setUser} = useContext(UserContext)
     const [create , setCreate] = useState(false)
     const [proposals ,setProposals] = useState()
     const [loading ,setLoading] = useState(false)
     const [error ,setError] = useState()
 
-    async function getUserProjects(){
+    async function getUserProposals(){
         try{
             setLoading(true)
-            const response = await fetch(`${HOST_NAME}/api/proposal?user=${''}`)
+            const response = await fetch(`${HOST_NAME}/api/proposal/user-proposal/${user.id}`)
             if(response.ok){
                 const data =  await response.json()
-                setProjects(data.projects)
+                setProposals(data.proposals)
             }
         }   
         catch(e){
             console.log(e);
-            
         }
         finally{
             setLoading(false)
         }
     }
 
+    async function getLocalUser(){
+    try{
+        const raw = await localStorage.getItem('beta-user')
+        let tmp = await JSON.parse(raw)
+        setUser(tmp)
+    }
+    catch(e){console.log(e.message);}
+    }
+
     useEffect(()=>{
-        getUserProjects()
-    },[0])
+        if(!user){
+            getLocalUser()
+        }
+        if(user){
+            getUserProposals()
+        }
+    },[user])
 
 
     if(create){
@@ -106,8 +121,8 @@ const ManageProposal = () => {
                 </div>
 
                 <DataTable 
-                    columns={['id' ,'name' ,'surName' ,'status']} 
-                    data={[{id:'1' ,name:'Simo' , status:'pending',surName:'Ulrich'} ,{id:'2' ,name:'test',status:'closed', surName:'test'}]} 
+                    columns={['Message' ,'Budget' ,'Mission' , 'Date', 'Status']} 
+                    data={proposals || []} 
                     update={false}
                     view={false}
                 />

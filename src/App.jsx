@@ -15,6 +15,7 @@ import ManageMission from './pages/Dashboard/manageMission.jsx'
 import ManageProposal from './pages/Dashboard/ManageProposal.jsx'
 import { UserProvider } from './providers/userProvider.jsx'
 import ProjectDetail from './pages/Project/ProjectDetails.jsx'
+import ApplicationForm from './pages/Mission/ApplicationForm.jsx'
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
 
             <Route path='mission' element={<Missions/>} />
             <Route path='mission-details' element={<MissionDetail/>} />
-            <Route path='apply-mission' element={<MissionDetail/>} />
+            <Route path='application-form' element={<ApplicationForm/>} />
           </Route>
 
           <Route path='/dashboard' element={<DashboardLayout/>} >

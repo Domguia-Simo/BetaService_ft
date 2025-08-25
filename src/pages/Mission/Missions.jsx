@@ -92,6 +92,9 @@ const Missions = () => {
         getMissions()
     },[filter])
 
+// console.log(missions);
+
+
     return(
 
         <React.Fragment>
@@ -108,12 +111,13 @@ const Missions = () => {
                 </div>
 
                 <div className="missions">
-                    {ms.map((item ,index) => (
+                    {missions && missions.map((item ,index) => (
                         <MissionItem key={index}
+                            _id={item._id}
                             img={item.img}
                             title={item.title}
-                            desc={item.desc}
-                            date={item.date}
+                            desc={item.description}
+                            date={item.duration}
                             budget={item.budget}
                         />))}
                 </div>

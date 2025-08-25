@@ -94,6 +94,7 @@ const Projects = () => {
                 <div className="projects">
                     {projects && projects.length != 0 && projects.map((item ,index) => (
                         <ProjectItem key={index} 
+                            _id={item._id}
                             title={item.project_name} 
                             img={item.img}
                             desc={item.description} 
