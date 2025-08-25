@@ -2,6 +2,7 @@ import React, { useEffect, useState ,useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/headerStyles.css'
 import UserContext from '../providers/userProvider'
+import logo from '../assets/cube.png'
 
 const Header =() =>{
     const userContext = useContext(UserContext)
@@ -29,7 +30,7 @@ const Header =() =>{
         <React.Fragment> 
             <div className='header-container'>
                 <div className='header-left'>
-                    <span className='header-logo' onClick={()=>navigate("/")} > ⬛BetaService</span>
+                    <span className='header-logo' onClick={()=>navigate("/")} > <img src={logo} width={30} height={30} /> <span> BetaService</span></span>
                     <div className='header-links'>
                         <span className='header-link'> <Link to={"/project"}>Projects</Link> </span>
                         <span className='header-link'> <Link to={'/mission'}> Missions</Link></span>

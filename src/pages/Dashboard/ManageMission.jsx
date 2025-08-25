@@ -9,13 +9,13 @@ const ManageMission = () => {
     const [loading ,setLoading] = useState(false)
     const [error ,setError] = useState()
 
-    async function getUserProjects(){
+    async function getUserMissions(){
         try{
             setLoading(true)
             const response = await fetch(`${HOST_NAME}/api/mission?user=${''}`)
             if(response.ok){
                 const data =  await response.json()
-                setProjects(data.missions)
+                setMissions(data.missions)
             }
         }   
         catch(e){
@@ -28,7 +28,7 @@ const ManageMission = () => {
     }
 
     useEffect(()=>{
-        getUserProjects()
+        getUserMissions()
     },[0])
 
 

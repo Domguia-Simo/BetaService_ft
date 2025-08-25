@@ -15,22 +15,23 @@
 }
 
 
-tr {
-    padding: 100px;
+tr , thead{
+    /* padding: 100px; */
     border-bottom: solid 1px rgb(0,0,0,0.5);
 
 }
-td{
-    min-width: 100px;
+td ,th{
+    /* min-width: 100px; */
+    /* width: 150px; */
     padding: 10px;
     /* border: solid 1px red; */
-
+    /* flex: 1; */
 }
 
 .table-head{
-    min-width: 100px;
+    /* min-width: 100px; */
     text-align: left;
     text-transform: capitalize;
     /* border: solid 1px red; */
-    padding: 10px;
+    /* padding: 10px; */
 }

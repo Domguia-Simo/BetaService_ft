@@ -7,13 +7,13 @@ const DataTable = ({columns ,data ,view=true, remove=true, update=true, deleteFx
         <React.Fragment>
             <div className="table-container" >
                 <table className="table" >
-                    <tr>
+                    {/* <tr> */}
                         <thead className="table-header">
                             {columns.map((column, index) => <TableHead  key={index} title={column} />)}
                             <th className="table-head" style={{color:'grey', textAlign:'center'}}>Actions</th>
                         </thead>
-                    </tr>
-                    <tr>
+                    {/* </tr> */}
+                    {/* <tr> */}
                         <tbody className="table-body">
                             {data.map((item,index )=>{
                                 return(
@@ -36,7 +36,7 @@ const DataTable = ({columns ,data ,view=true, remove=true, update=true, deleteFx
                             <tr>
                             </tr>
                         </tbody>
-                    </tr>
+                    {/* </tr> */}
                     
                 </table>
             </div>

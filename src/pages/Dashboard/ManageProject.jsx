@@ -179,7 +179,7 @@ const ManageProject = () => {
                 </div>
 
                 <DataTable 
-                    columns={['Project Name' ,'Type' , 'description', 'link','Status']} 
+                    columns={['Name' ,'Type' , 'description', 'link','Status']} 
                     data={projects || []} 
                     deleteFxn={deleteProject}
 
