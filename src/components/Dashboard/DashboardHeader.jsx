@@ -1,8 +1,16 @@
-import React from "react";
+import React,{useContext} from "react";
 import { useNavigate ,Link} from "react-router-dom";
+import UserContext from "../../providers/userProvider";
 
 const DashboardHeader = () => {
+    const {user ,setUser} = useContext(UserContext)
     const navigate = useNavigate()
+    
+    async function logout(){
+        setUser(null)
+        await localStorage.setItem('beta-user' ,'')
+        window.location.pathname = "/"
+    }
 
     return(
         <React.Fragment>
@@ -18,7 +26,7 @@ const DashboardHeader = () => {
 
                 <div className='header-right'>
                     <button style={{border:'solid 1px rgb(0,0,0,0.2)'}}>🔔</button>
-                    <button style={{border:'solid 1px rgb(0,0,0,0.2)' , color:"grey" ,fontWeight:1000}}>D</button>
+                    <button style={{border:'solid 1px rgb(0,0,0,0.2)' , color:"grey" ,fontWeight:1000}} onClick={logout}> Logout </button>
                 </div>
 
             </div>

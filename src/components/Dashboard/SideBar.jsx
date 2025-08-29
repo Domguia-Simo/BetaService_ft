@@ -1,10 +1,11 @@
-import React ,{useState} from "react";
+import React ,{useState ,useContext ,useEffect} from "react";
 import { useNavigate  ,useLocation} from "react-router-dom";
 import '../../styles/sidebarStyles.css'
+import UserContext from "../../providers/userProvider";
 
 const routes = [
     {
-        name:'Dashboard Overview',
+        name:'Overview',
         path:'/dashboard',
         icon:'📊'
     },
@@ -31,15 +32,41 @@ const routes = [
 ]
 
 const SideBar = () => {
+    const {user ,setUser} = useContext(UserContext)
     const [show ,setShow] = useState(true)
+
+    async function getLocalUser(){
+        try{
+            const raw = await localStorage.getItem('beta-user')
+            console.log('raw string' ,raw);
+            
+            if(raw){
+                const data = await JSON.parse(raw)
+                console.log("in sidebar :" ,data);
+                
+                setUser(data)
+            }
+        }
+        catch(e){
+            console.log(e.message);
+            
+        }
+    }
+
+    useEffect(()=>{
+        if(!user){
+            getLocalUser()
+        }
+    },[user])
+
     return(
         <React.Fragment>
             <div className={true ? "sidebar-container":'hide-sidebar'}>
                 <div className="sidebar-header">
-                    <span className="sidebar-img"><img/></span>
+                    <div className="sidebar-img"> <div style={{fontWeight:1000, fontSize:'x-large' ,color:'grey' ,display:'flex' ,alignItems:'center' ,justifyContent:'center' ,height:'100%'}}>{user.name.charAt(0) || ''}</div> </div>
                     <div className="sidebar-header-content">
-                        <span className="sidebar-title">Domguia Simo</span>
-                        <span>6cf08952</span>
+                        <span className="sidebar-title">{user.name || 'Admin'}</span>
+                        <span style={{fontSize:'small'}}>{user.id.slice(0,10) ||'6cf08952'}</span>
                     </div>
                 </div>
 

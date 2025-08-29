@@ -1,10 +1,12 @@
-import React ,{useState} from "react";
+import React ,{useState ,useContext} from "react";
 import { useNavigate ,Link } from 'react-router-dom'
 import { HOST_NAME } from "../../config";
+import UserContext from "../../providers/userProvider";
 
 
 const Login = () => {
 
+    const {user ,setUser} = useContext(UserContext)
     const navigate = useNavigate()
     const [email ,setEmail] = useState('')
     const [password ,setPassword] = useState('')
@@ -32,6 +34,7 @@ const Login = () => {
             // console.log(data)
             if(response.ok){
                 await localStorage.setItem("beta-user" ,JSON.stringify(data.user))
+                setUser(data.user)
                 if(data.user){
                     navigate("/dashboard")
                 }

@@ -16,13 +16,16 @@ const ManageProject = () => {
         type:'',
         description:'',
         link:'',
-        status:''
+        status:'',
+        files:[]
     })
+    const [images ,setImages] = useState([])
+    
 
     async function getUserProjects(){
         try{
             setLoading(true)
-            const response = await fetch(`${HOST_NAME}/api/project?user=${''}`)
+            const response = await fetch(`${HOST_NAME}/api/project/user/${user.id}`)
             if(response.ok){
                 const data =  await response.json()
                 setProjects(data.projects)
@@ -43,18 +46,31 @@ const ManageProject = () => {
 
     async function saveProject(e) {
         e.preventDefault()
-        const {name ,status ,type ,link, description} = info
-        // console.log(info);
-        
-        // return 
+        const {name ,status ,type ,link, description ,files} = info
+
+        const formData = new FormData()
+        for(let i=0;i<files.length;i++){
+            formData.append('files' ,files[i])
+        }
+        formData.append('name', name)
+        formData.append('status', status)
+        formData.append('link', link)
+        formData.append('type', type)
+        formData.append('description',description)
+console.log(formData);
+// return
+
         try{
             setLoading(true)
             const response = await fetch(`${HOST_NAME}/api/project` ,{
                 method:'post',
                 headers:{
-                    'content-type':'application/json',
+                    // 'content-type':'application/json',
+                    'authorization':`Token ${user.token}`
                 },
-                body:JSON.stringify({name ,status ,link ,type ,description})
+                // body:JSON.stringify({name ,status ,link ,type ,description})
+                body:formData
+            
             })
             if(response.ok){
                 const data = await response.json()
@@ -97,6 +113,18 @@ const ManageProject = () => {
         }
     }
 
+    function handleImageChange(e) {
+        console.log(e.target.files);
+        setInfo({...info ,files:e.target.files})
+        for(let i=0;i<(e.target.files).length;i++){
+            
+            const fileReader = new FileReader()
+            fileReader.onload = (e) => {
+                setImages(prev => [...prev,  fileReader.result])
+            }   
+            fileReader.readAsDataURL(e.target.files[i])
+        }
+    }
 
     if(create){
     return(
@@ -154,10 +182,21 @@ const ManageProject = () => {
 
                     <div className="form-group">
                         <span>Upload project images</span>
-                        <input type="file" />
+                        <input type="file" name="files" multiple onChange={e=>handleImageChange(e)}/>
                     </div>
+
+                    <div>
+                        <div style={{display:'flex' ,gap:10 }}>
+                        {
+                            images && images.map((image ,idx) => (
+                                    <img key={idx} src={image} style={{width:100 ,height:100}}/>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    
                     <br/>
-                    <button className="dashboard-btn2" disabled={loading}>Save</button>
+                    <button className="dashboard-btn2" style={{width:'fit-content'}} disabled={loading}>Save</button>
 
                 </div>
                 </form>
@@ -179,7 +218,7 @@ const ManageProject = () => {
                 </div>
 
                 <DataTable 
-                    columns={['Name' ,'Type' , 'description', 'link','Status']} 
+                    columns={['Name' ,'Type' , 'description', 'link']} 
                     data={projects || []} 
                     deleteFxn={deleteProject}
 

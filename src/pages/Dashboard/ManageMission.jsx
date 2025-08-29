@@ -153,8 +153,8 @@ const ManageMission = () => {
                     </div>
 
                     <div className="form-group">
-                        <span>Budget range</span>
-                        <input type="text" placeholder="ex: 100 - 2000xaf" name="budget" value={info.budget} onChange={e=>handleChange(e)}  />
+                        <span>Budget (xaf)</span>
+                        <input type="number" placeholder="ex:10000" name="budget" value={info.budget} onChange={e=>handleChange(e)}  />
                     </div>
                     <br/>
                     <button className="dashboard-btn2" >Save</button>

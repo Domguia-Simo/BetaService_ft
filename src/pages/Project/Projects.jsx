@@ -96,7 +96,7 @@ const Projects = () => {
                         <ProjectItem key={index} 
                             _id={item._id}
                             title={item.project_name} 
-                            img={item.img}
+                            img={item.files[0] || ''}
                             desc={item.description} 
                         />) )}
                 </div>

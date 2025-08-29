@@ -1,9 +1,11 @@
-import React ,{useState ,useEffect} from "react";
+import React ,{useState ,useEffect ,useContext} from "react";
 import { useSearchParams ,Link ,useNavigate } from "react-router-dom";
 import { HOST_NAME } from "../../config";
+import UserContext from "../../providers/userProvider";
 
 const MissionDetail = () => {
 
+    const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate()
     const [loading ,setLoading] = useState(false)
     const [mission ,setMission] = useState()
@@ -29,11 +31,15 @@ const MissionDetail = () => {
     useEffect(()=>{
         getMissionDetail()
     },[0])
+    // console.log(mission);
+    
 
     function goToForm(){
         setSearchParams({mission_id:searchParams.get('mission_id'), deadline:mission.duration, proposals:mission.proposals, status:mission.status, category:mission.type})
         console.log(searchParams.toString());
     }
+    // console.log("mission - user" ,user.id == mission.user);
+    
 
 if(mission){
     return(
@@ -72,12 +78,17 @@ if(mission){
 
                 <div>
                     <h3>Budget</h3>
-                    <span>500xaf - 2000xaf</span>
+                    <span>{mission.budget} xaf</span>
                 </div>
 
-                <div>
-                    <button className="btn" onClick={()=>{goToForm();navigate("/application-form?"+searchParams.toString())}}>Apply for mission</button>
+                {user ? <div>
+                    <button disabled={mission.user == user.id} className={mission.user == user.id ? '':"btn"} onClick={()=>{goToForm();navigate("/application-form?"+searchParams.toString())}}>Apply for mission</button>
                 </div>
+                :
+                <div>
+                    <button onClick={()=>navigate("/auth/login")} className="btn">Apply for mission</button>
+                </div>
+                }
             </div>
         </React.Fragment>
     )
