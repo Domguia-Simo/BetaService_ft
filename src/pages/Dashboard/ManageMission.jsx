@@ -3,8 +3,10 @@ import { HOST_NAME } from "../../config";
 import DataTable from "../../components/Dashboard/DataTable";
 import Select from "../../components/Select";
 import UserContext from "../../providers/userProvider";
+import { useNavigate } from "react-router-dom";
 
 const ManageMission = () => {
+    const navigate = useNavigate()
     const {user ,setUser} = useContext(UserContext)
     const [create , setCreate] = useState(false)
     const [missions ,setMissions] = useState()
@@ -180,6 +182,7 @@ const ManageMission = () => {
                     columns={['Title' ,'Deadline' ,'Description' ,'budget' ,'type' ]} 
                     data={missions || []} 
                     deleteFxn={deleteMission}
+                    viewFxn={(id)=>navigate("/dashboard/manage-applications?mission-id="+id)}
                 />
 
             </div>

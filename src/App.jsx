@@ -16,6 +16,7 @@ import ManageProposal from './pages/Dashboard/ManageProposal.jsx'
 import { UserProvider } from './providers/userProvider.jsx'
 import ProjectDetail from './pages/Project/ProjectDetails.jsx'
 import ApplicationForm from './pages/Mission/ApplicationForm.jsx'
+import ManageApplication from './pages/Dashboard/ManageApplication.jsx'
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
             <Route path='manage-projects' element={<ManageProject/>} />
             <Route path='manage-missions' element={<ManageMission/>} />
             <Route path='manage-proposals' element={<ManageProposal/>} />
-
+            <Route path='manage-applications' element={<ManageApplication/>} />
           </Route>
 
           <Route path='/auth' element={<AuthLayout/>}>
