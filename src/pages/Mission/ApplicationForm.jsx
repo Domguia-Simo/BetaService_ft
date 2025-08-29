@@ -1,15 +1,16 @@
 import React ,{useState ,useContext} from "react";
-import { Link ,useSearchParams } from "react-router-dom";
+import { Link ,useLocation,useSearchParams } from "react-router-dom";
 import { HOST_NAME } from "../../config";
 import UserContext from "../../providers/userProvider";
 
 const ApplicationForm =  () => {
 
+    const location = useLocation()
     const {user ,setUser} = useContext(UserContext)
     const [searchParams ,setSearchParams] = useSearchParams()
     const [info ,setInfo] = useState({
         letter:'',
-        price:'',
+        price:location.state.budget,
         files:[]
     })
     const [loading, setLoading] = useState(false)
@@ -61,19 +62,28 @@ const ApplicationForm =  () => {
                 </div>
 
                 <div>
-
+                    <h4>Mission Summary</h4>
+                    <div style={{display:'flex' ,flexDirection:'column' ,padding:'0px 50px'}}>
+                        <strong>{location.state.title}</strong>
+                        <span>{location.state.description}</span>
+                    </div>
                 </div>
 
-                    <form action="" onSubmit={e=>applyMission(e)}>
+                    <form action="" onSubmit={e=>applyMission(e)} style={{marginTop:-20}}>
                 <div className="form">
                     <div className="form-group">
-                        <span>Cover | Motivation letter</span>
-                        <textarea style={{height:100}} name="letter" value={info.letter}  onChange={handleChange}></textarea>
+                        <span>Fixed budget (xaf)</span>
+                        <input type="text" name="price" disabled value={location.state.budget} onChange={handleChange} />
                     </div>
 
                     <div className="form-group">
-                        <span>Your price</span>
-                        <input type="text" name="price" value={info.price} onChange={handleChange} />
+                        <span>Deadline</span>
+                        <input type="text"  disabled value={(new Date(location.state.deadline)).toDateString()} onChange={handleChange} />
+                    </div>
+
+                    <div className="form-group">
+                        <span>Cover letter</span>
+                        <textarea style={{height:50}} name="letter" value={info.letter}  onChange={handleChange}></textarea>
                     </div>
 
                     <div className="form-group">

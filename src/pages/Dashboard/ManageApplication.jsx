@@ -2,6 +2,9 @@ import React ,{useState ,useEffect ,useContext} from "react";
 import { useSearchParams } from "react-router-dom";
 import { HOST_NAME } from "../../config";
 import UserContext from "../../providers/userProvider";
+import mtn from '../../assets/mtnMoney.jpg'
+import orange from '../../assets/orangeMoney.jpg'
+
 
 const ManageApplication = () => {
     
@@ -102,7 +105,13 @@ const ManageApplication = () => {
                         </div>
 
                         <div className="form-group">
-                            <span>Phone Number</span>
+                            <div style={{display:'flex' ,alignItems:'center',gap:10 ,padding:3}}>
+                                <span>Phone Number</span> <b>|</b>
+                                <div style={{display:'flex', gap:5}}>
+                                    <img src={mtn} style={{width:40, height:40, borderRadius:5}} />
+                                    <img src={orange} style={{width:40, height:40, borderRadius:5}}/>
+                                </div>
+                            </div>
                             <input type="text" name='phone' value={info.phone} onChange={handleChange} placeholder="ex: 6xxxxxxxx" required/>
                         </div>
 

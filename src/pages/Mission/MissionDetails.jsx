@@ -82,7 +82,7 @@ if(mission){
                 </div>
 
                 {user ? <div>
-                    <button disabled={mission.user == user.id} className={mission.user == user.id ? '':"btn"} onClick={()=>{goToForm();navigate("/application-form?"+searchParams.toString())}}>Apply for mission</button>
+                    <button disabled={mission.user == user.id} className={mission.user == user.id ? '':"btn"} onClick={()=>{goToForm();navigate("/application-form?"+searchParams.toString(), {state:{budget:mission.budget ,title:mission.title, description:mission.description ,deadline:mission.duration}})}}>Apply for mission</button>
                 </div>
                 :
                 <div>

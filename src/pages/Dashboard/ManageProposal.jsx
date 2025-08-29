@@ -10,6 +10,7 @@ const ManageProposal = () => {
     const [proposals ,setProposals] = useState()
     const [loading ,setLoading] = useState(false)
     const [error ,setError] = useState()
+    const [refresh ,setRefresh] = useState(false)
 
     async function getUserProposals(){
         try{
@@ -44,7 +45,22 @@ const ManageProposal = () => {
         if(user){
             getUserProposals()
         }
-    },[user])
+    },[user, refresh])
+
+
+    async function deleteProposal(id){
+        try{
+            const response = await fetch(`${HOST_NAME}/api/proposal/${id}` ,{
+                method:'delete'
+            })
+            if(response.ok){
+                setRefresh(prev => !prev)
+            }
+        }
+        catch(e){
+            console.log(e.message);
+        }
+    }
 
 
     if(create){
@@ -125,6 +141,7 @@ const ManageProposal = () => {
                     data={proposals || []} 
                     update={false}
                     view={false}
+                    deleteFxn={deleteProposal}
                 />
 
             </div>
